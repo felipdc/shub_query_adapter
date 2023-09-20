@@ -1,6 +1,16 @@
 import json
 
 def translate_operator(op, field, value):
+    
+    if value.startswith('"') and value.endswith('"'):
+        value = value[1:-1]  # Strip the quotes
+    # If not, try to convert the value to an integer
+    else:
+        try:
+            value = int(value)
+        except ValueError:
+            pass
+        
     if op in ['=', '<', '>', '<=', '>=', '!=']:
         return [field, op, [value]]
     elif op == 'exists':
