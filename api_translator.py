@@ -42,10 +42,11 @@ def translate_to_api(from_clause, where, limit):
         field = None
         op = None
         value = None
-        if op not in ['=', '<', '>', '<=', '>=', '!=']:
-            field, op = where.split()
-        else:
+        if len(where.split()) == 3:
             field, op, value = where.split()
+        else:
+            field, op = where.split()
+            
         filter_value = translate_operator(op, field, value)
         filters.append(json.dumps(filter_value))
 
