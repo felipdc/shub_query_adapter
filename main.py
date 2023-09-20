@@ -9,5 +9,5 @@ def execute_query(sql_query):
     return send_request(path_param, params)
 
 if __name__ == "__main__":
-    query = "SELECT * FROM 684510/1/20 WHERE heading = 33"
+    query = "SELECT * FROM 684510/1/20 WHERE heading exists limit 5"
     print(execute_query(query))
