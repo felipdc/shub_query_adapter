@@ -10,6 +10,11 @@ def parse_query(sql_query):
     tokens = [token for token in parsed.tokens if not token.is_whitespace]
 
     for i, token in enumerate(tokens):
+
+        if token.value.upper() == "SELECT":
+            columns = tokens[i+1].value.strip()
+            select_columns = [col.strip() for col in columns.split(",")]
+
         if token.value.upper() == "FROM":
             from_clause = tokens[i+1].value.strip()
         
@@ -22,4 +27,4 @@ def parse_query(sql_query):
         if "LIMIT" in token.value.upper():
             limit = int(tokens[i+1].value.strip())
 
-    return from_clause, where_conditions, limit
+    return select_columns, from_clause, where_conditions, limit
