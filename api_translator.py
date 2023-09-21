@@ -4,8 +4,7 @@ def translate_operator(op, field, value):
     
     if value:
         if value.startswith('"') and value.endswith('"'):
-            value = value[1:-1]  # Strip the quotes
-        # If not, try to convert the value to an integer
+            value = value[1:-1]
         else:
             try:
                 value = int(value)
@@ -51,7 +50,7 @@ def translate_to_api(from_clause, where, limit):
         filters.append(json.dumps(filter_value))
 
     params = {
-        'filterany': filters  # Note the change from 'filter' to 'filterany'
+        'filterany': filters
     }
 
     if limit:

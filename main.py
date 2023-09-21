@@ -10,5 +10,5 @@ def execute_query(sql_query):
     return filter_columns(raw_data, select_columns)
 
 if __name__ == "__main__":
-    query = 'SELECT * FROM 435191/864/42 WHERE domain = "at" limit 1'
+    query = 'SELECT hq, location FROM 435191/864/42 WHERE domain = "at" limit 1'
     print(execute_query(query))
