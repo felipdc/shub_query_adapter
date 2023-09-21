@@ -38,20 +38,20 @@ def translate_operator(op, field, value):
 def translate_to_api(from_clause, where, limit):
     filters = []
     
-    if where:
+    for condition in where:
         field = None
         op = None
         value = None
-        if len(where.split()) == 3:
-            field, op, value = where.split()
+        if len(condition.split()) == 3:
+            field, op, value = condition.split()
         else:
-            field, op = where.split()
+            field, op = condition.split()
             
         filter_value = translate_operator(op, field, value)
         filters.append(json.dumps(filter_value))
 
     params = {
-        'filter': filters
+        'filterany': filters  # Note the change from 'filter' to 'filterany'
     }
 
     if limit:
@@ -59,5 +59,4 @@ def translate_to_api(from_clause, where, limit):
 
     path_param = from_clause
 
-    # print(params)
     return path_param, params
