@@ -1,12 +1,10 @@
 import requests
-import os
 
 API_ENDPOINT = 'http://storage.scrapinghub.com/items/'
-API_KEY = os.environ["API_KEY"]
 
-def send_request(path_param, params):
+def send_request(path_param, params, api_key):
     headers = {
-        'Authorization': f"Basic {API_KEY}"
+        'Authorization': f"Basic {api_key}"
     }
     
     params['format'] = 'json'
