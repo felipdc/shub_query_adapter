@@ -1,4 +1,5 @@
 import json
+import re
 
 def translate_operator(op, field, value):
     
@@ -10,7 +11,7 @@ def translate_operator(op, field, value):
                 value = int(value)
             except ValueError:
                 pass
-        
+    
     if op in ['=', '<', '>', '<=', '>=', '!=']:
         return [field, op, [value]]
     elif op == 'exists':
@@ -38,19 +39,19 @@ def translate_to_api(from_clause, where, limit):
     filters = []
     
     for condition in where:
-        field = None
-        op = None
-        value = None
-        if len(condition.split()) == 3:
-            field, op, value = condition.split()
+        match = re.match(r'(\w+)\s*([=<>!]+|exists|notexists)\s*(?:"(.*?)"|(\d+)|$)', condition)
+        print(condition)
+        if match:
+            field, op, value_str, value_num = match.groups()
+            value = value_str if value_str is not None else value_num
         else:
-            field, op = condition.split()
-            
+            raise ValueError(f"Invalid condition: {condition}")
+        
         filter_value = translate_operator(op, field, value)
         filters.append(json.dumps(filter_value))
 
     params = {
-        'filterany': filters
+        'filter': filters
     }
 
     if limit:
