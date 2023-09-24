@@ -1,6 +1,6 @@
-from api_translator import translate_to_api
-from api_requester import send_request
-from utils import filter_columns
+from .api_translator import translate_to_api
+from .api_requester import send_request
+from .utils import filter_columns
 
 
 class ShubQueryAdapter:

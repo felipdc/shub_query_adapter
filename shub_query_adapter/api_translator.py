@@ -39,7 +39,7 @@ def translate_to_api(from_clause, where, limit):
     filters = []
     
     for condition in where:
-        match = re.match(r'(\w+)\s*([=<>!]+|exists|notexists)\s*(?:"(.*?)"|(\d+)|$)', condition)
+        match = re.match(r'(\w+)\s*([=<>!|contains|icontains]+|exists|notexists|isempty|isnotempty)\s*(?:"(.*?)"|(\d+)|$)', condition)
         if match:
             field, op, value_str, value_num = match.groups()
             value = value_str if value_str is not None else value_num
