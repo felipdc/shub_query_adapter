@@ -1,4 +1,4 @@
-from query_parser import QueryBuilder
+from query_builder import QueryBuilder
 from api_translator import translate_to_api
 from api_requester import send_request
 from utils import filter_columns
@@ -18,9 +18,3 @@ class ShubQueryAdapter:
         path_param, params = translate_to_api(from_clause, where_conditions, limit_value)
         raw_data = send_request(path_param, params, self.api_key)
         return filter_columns(raw_data, select_columns)
-    
-    
-adapter = ShubQueryAdapter('API KEY')
-query = (QueryBuilder().select().from_("684510/2/17").where('gate').equals("A9 ").limit(1).build())
-result = adapter.execute_query(query)
-print(result)

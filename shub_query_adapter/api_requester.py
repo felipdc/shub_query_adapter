@@ -7,7 +7,6 @@ def send_request(path_param, params, api_key):
     
     url = f"{API_ENDPOINT}{path_param}"
     response = requests.get(url, params=params, auth=(api_key, ''))
-    print(response.request.url)
     if response.status_code == 200:
         return response.json()
     else:
