@@ -21,7 +21,7 @@ from query_builder import QueryBuilder
 
 query = (QueryBuilder()
          .select(["name", "price"])
-         .from_("my_project/items")
+         .from_("684510/2/17")
          .where("name").contains("laptop")
          .and_("price").lt("1000")
          .limit(10)
