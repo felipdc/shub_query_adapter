@@ -17,7 +17,7 @@ pip install shub_query_adapter
 Use the `QueryBuilder` class to construct your query:
 
 ```python
-from query_builder import QueryBuilder
+from shub_query_adapter.query_builder import QueryBuilder
 
 query = (QueryBuilder()
          .select(["name", "price"])
@@ -33,7 +33,7 @@ query = (QueryBuilder()
 Once you have your query, you can use the `ShubQueryAdapter` to execute it:
 
 ```python
-from adapter import ShubQueryAdapter
+from shub_query_adapter.adapter import ShubQueryAdapter
 
 adapter = ShubQueryAdapter(api_key="YOUR_API_KEY")
 results = adapter.execute_query(query)
