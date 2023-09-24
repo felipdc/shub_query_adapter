@@ -1,4 +1,3 @@
-from query_builder import QueryBuilder
 from api_translator import translate_to_api
 from api_requester import send_request
 from utils import filter_columns
