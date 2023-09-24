@@ -6,9 +6,9 @@ The `shub_query_adapter` is a Python project that provides an interface to query
 
 To use the `shub_query_adapter`, you can install via pip:
 
-\'''bash
+```bash
 pip install shub_query_adapter
-\'''
+```
 
 ## Usage
 
@@ -16,7 +16,7 @@ pip install shub_query_adapter
 
 Use the `QueryBuilder` class to construct your query:
 
-\```python
+```python
 from query_builder import QueryBuilder
 
 query = (QueryBuilder()
@@ -26,19 +26,19 @@ query = (QueryBuilder()
          .and_("price").lt("1000")
          .limit(10)
          .build())
-\```
+```
 
 ### 2. Executing the Query
 
 Once you have your query, you can use the `ShubQueryAdapter` to execute it:
 
-\```python
+```python
 from adapter import ShubQueryAdapter
 
 adapter = ShubQueryAdapter(api_key="YOUR_API_KEY")
 results = adapter.execute_query(query)
 print(results)
-\```
+```
 
 ## Supported Operators
 
