@@ -6,9 +6,9 @@ The `shub_query_adapter` is a Python project that provides an interface to query
 
 To use the `shub_query_adapter`, you can install via pip:
 
-\```bash
+\'''bash
 pip install shub_query_adapter
-\```
+\'''
 
 ## Usage
 
