@@ -11,9 +11,10 @@ class ShubQueryAdapter:
         
         select_columns = query["select"]
         from_clause = query["from"]
-        where_conditions = query["where"]
+        where_conditions = query.get("where")
         limit_value = query.get("limit")
+        start_after = query.get("start_after")
         
-        path_param, params = translate_to_api(from_clause, where_conditions, limit_value)
+        path_param, params = translate_to_api(from_clause, where_conditions, limit_value, start_after)
         raw_data = send_request(path_param, params, self.api_key)
         return filter_columns(raw_data, select_columns)

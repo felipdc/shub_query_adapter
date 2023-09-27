@@ -4,10 +4,15 @@ class QueryBuilder:
         self.from_table = None
         self.where_conditions = []
         self.limit_value = None
+        self.start_after = None
         self._current_field = None
 
     def select(self, columns = []):
         self.select_columns = columns
+        return self
+    
+    def random(self):
+        self.start_after = 'random'
         return self
 
     def from_(self, table):
@@ -82,4 +87,6 @@ class QueryBuilder:
         }
         if self.limit_value:
             query["limit"] = self.limit_value
+        if self.start_after:
+            query["start_after"] = self.start_after
         return query

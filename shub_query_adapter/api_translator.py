@@ -35,7 +35,7 @@ def translate_operator(op, field, value):
     else:
         raise ValueError(f"Unsupported operator: {op}")
 
-def translate_to_api(from_clause, where, limit):
+def translate_to_api(from_clause, where, limit, start_after):
     filters = []
     
     for condition in where:
@@ -55,6 +55,9 @@ def translate_to_api(from_clause, where, limit):
 
     if limit:
         params['count'] = limit
+        
+    if start_after:
+        params['startafter'] = start_after
 
     path_param = from_clause
 
