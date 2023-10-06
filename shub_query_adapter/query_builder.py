@@ -5,6 +5,7 @@ class QueryBuilder:
         self.where_conditions = []
         self.limit_value = None
         self.start_after = None
+        self.total_count_value = None
         self._current_field = None
 
     def select(self, columns = []):
@@ -69,6 +70,10 @@ class QueryBuilder:
     def limit(self, value):
         self.limit_value = value
         return self
+    
+    def total_count(self, value):
+        self.total_count_value = value
+        return self
 
     def _append_condition(self, operator, value):
         if self._current_field is None:
@@ -89,4 +94,6 @@ class QueryBuilder:
             query["limit"] = self.limit_value
         if self.start_after:
             query["start_after"] = self.start_after
+        if self.total_count_value:
+            query["total_count"] = self.total_count_value
         return query

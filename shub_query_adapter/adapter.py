@@ -12,9 +12,10 @@ class ShubQueryAdapter:
         select_columns = query["select"]
         from_clause = query["from"]
         where_conditions = query.get("where")
+        total_count = query.get("total_count")
         limit_value = query.get("limit", 1)
         start_after = query.get("start_after")
-        return select_columns, from_clause, where_conditions, limit_value, start_after
+        return select_columns, from_clause, where_conditions, limit_value, start_after, total_count
     
 
     def execute_query(self, query):
@@ -30,13 +31,16 @@ class ShubQueryAdapter:
         return get_items_request(path_param, params, self.api_key)
 
     def execute_query_random(self, query):
-        select_columns, from_clause, where_conditions, limit_value, start_after = self._parse_query(query)
+        select_columns, from_clause, where_conditions, limit_value, start_after, total_count = self._parse_query(query)
         path_param, params = translate_to_api(from_clause, where_conditions, 1, start_after)
 
-        try:
-            total_items_count = get_job_stats_request(path_param, self.api_key)['scrapystats']['consumers_processed_items']
-        except KeyError:
-            raise ValueError(f"Failed to get total item count from API response.")
+        if (total_count == None):
+            try:
+                total_items_count = get_job_stats_request(path_param, self.api_key)['scrapystats']['consumers_processed_items']
+            except KeyError:
+                raise ValueError(f"Failed to get total item count from API response.")
+        else:
+            total_items_count = total_count
         
         random_start_after = generate_unique_random_numbers(total_items_count, limit_value)
         
