@@ -19,7 +19,7 @@ class ShubQueryAdapter:
     
 
     def execute_query(self, query):
-        select_columns, from_clause, where_conditions, limit_value, start_after = self._parse_query(query)
+        select_columns, from_clause, where_conditions, limit_value, start_after, total_count = self._parse_query(query)
         path_param, params = translate_to_api(from_clause, where_conditions, limit_value, start_after)
 
         raw_data = get_items_request(path_param, params, self.api_key)
